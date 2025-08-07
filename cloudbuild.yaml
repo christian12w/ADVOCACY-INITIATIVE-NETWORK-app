@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull gcr.io/fldemo-315215/advocacy-initiative-network-33271-dev:latest || exit 0']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+        'build',
+        '-t', 'gcr.io/fldemo-315215/advocacy-initiative-network-33271-dev:latest',
+        '--file', 'Dockerfile.dev',
+        '--cache-from', 'gcr.io/fldemo-315215/advocacy-initiative-network-33271-dev:latest',
+        '.'
+    ]
+images: ['gcr.io/fldemo-315215/advocacy-initiative-network-33271-dev:latest']
+logsBucket: 'gs://fldemo-315215-cloudbuild-logs'
